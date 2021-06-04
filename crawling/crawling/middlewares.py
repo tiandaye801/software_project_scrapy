@@ -105,20 +105,32 @@ class CrawlingDownloaderMiddleware:
 from scrapy import signals
 import scrapy
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import time
 from selenium.webdriver.support.ui import WebDriverWait
 from scrapy.http import HtmlResponse
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By 
+from selenium.webdriver import ActionChains
+import time
 
 class BytedanceDownloaderMiddleware(object):
     def process_request(self, request, spider):
         option = webdriver.ChromeOptions()
         option.add_argument('--headless')
-        option.add_argument('--disable-gpu')
-        self.driver = webdriver.Chrome(chrome_options=option)
-        self.driver.get(request.url)
+         # option.add_argument('--disable-gpu')
+        driver = webdriver.Chrome(chrome_options=option)
+        driver.get(request.url)
+        while(True):
+            data = driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div[2]/span").text
+            if(data == '没有更多啦'): 
+                break
+            #定位到需要左击的元素
+            left_click = driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div[2]/span")
+            #对元素进行左击操作
+            ActionChains(driver).click(left_click).perform()
+            time.sleep(1)
         #html = self.driver.page_source
         #self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.m-itemlist .items .item')))
-        return scrapy.http.HtmlResponse(url = request.url, body = self.driver.page_source.encode('utf-8'), encoding = 'utf-8', request = request, status = 200)
+        return scrapy.http.HtmlResponse(url = request.url, body = driver.page_source.encode('utf-8'), encoding = 'utf-8', request = request, status = 200)
         

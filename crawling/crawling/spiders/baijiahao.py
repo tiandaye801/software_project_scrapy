@@ -13,7 +13,7 @@ class baijiahao(scrapy.Spider):
 
 
     def parse(self, response):
-        for i in range(20):
+        for i in range(50): # 可以让前端用户自行输入要查找的条数
             item = ScrapyuniversalItem() 
             comment = response.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div[1]/div[{}]/div/div[2]/div[2]/span/text()".format(i+1)).extract()
             name = response.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div[1]/div[{}]/div/div[2]/div[1]/h5/text()".format(i+1)).extract()
