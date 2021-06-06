@@ -113,10 +113,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By 
 from selenium.webdriver import ActionChains
 import time
+f = open('../../../crawling/crawling/spiders/words.txt', 'r')
+content = f.read()
+f.close()
 
 class BytedanceDownloaderMiddleware(object):
     def process_request(self, request, spider):
-        search_content = 'selenium' 
+        search_content = content
         option = webdriver.ChromeOptions()
         option.add_argument('--headless')
         # option.add_argument('--disable-gpu')

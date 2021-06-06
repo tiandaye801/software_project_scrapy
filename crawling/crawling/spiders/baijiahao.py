@@ -6,7 +6,6 @@ from ..items import ScrapyuniversalItem
 f = open('links.txt', 'r')
 start_url = f.read()
 f.close()
-print(start_url)
 
 class baijiahao(scrapy.Spider):
 
