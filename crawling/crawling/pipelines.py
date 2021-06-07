@@ -5,8 +5,11 @@
 
 
 # useful for handling different item types with a single interface
+
+
 from pymongo import MongoClient
 from scrapy import Item
+
 
 class MongoDBPipeline(object):
 
@@ -32,4 +35,8 @@ class MongoDBPipeline(object):
         if isinstance(item, Item):
             item = dict(item)
         self.db.books.insert(item)
+
+
+
+
 
