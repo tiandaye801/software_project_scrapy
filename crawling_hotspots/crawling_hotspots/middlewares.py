@@ -119,13 +119,13 @@ f.close()
 
 class BytedanceDownloaderMiddleware(object):
     def process_request(self, request, spider):
-        search_content = content
-        option = webdriver.ChromeOptions()
-        option.add_argument('--headless')
-        # option.add_argument('--disable-gpu')
-        driver = webdriver.Chrome(chrome_options=option)
-        driver.get(request.url)
         if (request.url == 'http://www.baidu.com/'):
+            search_content = content
+            option = webdriver.ChromeOptions()
+            option.add_argument('--headless')
+            # option.add_argument('--disable-gpu')
+            driver = webdriver.Chrome(chrome_options=option)
+            driver.get(request.url)
             driver.find_element_by_xpath('//*[@id="kw"]').send_keys(search_content)
             time.sleep(1) 
             driver.find_element_by_xpath('//*[@id="su"]').click()
@@ -138,4 +138,8 @@ class BytedanceDownloaderMiddleware(object):
             driver.find_element_by_xpath('//*[@id="c-tips-container"]/div/div/div/ul/li[3]/a').click()
             time.sleep(1)
             return scrapy.http.HtmlResponse(url = request.url, body = driver.page_source.encode('utf-8'), encoding = 'utf-8', request = request, status = 200)
-        return scrapy.http.HtmlResponse(url = request.url, body = driver.page_source.encode('utf-8'), encoding = 'utf-8', request = request, status = 200)
+        else:
+            return None
+        
+    def process_response(self, request, response, spider):
+        return response
