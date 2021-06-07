@@ -3,12 +3,14 @@ from scrapy import Request, Spider
 from urllib.parse import quote
 from ..items import ScrapyuniversalItem
 
+f = open('links.txt', 'r')
+start_url = f.read()
+f.close()
 
 class baijiahao(scrapy.Spider):
 
     name = 'baijiahao'
-    start_urls = ['https://baijiahao.baidu.com/s?id=1701473545312252129&wfr=spider&for=pc']
-
+    start_urls = [start_url]
     headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}
 
 
