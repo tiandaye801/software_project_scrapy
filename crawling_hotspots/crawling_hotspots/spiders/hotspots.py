@@ -7,7 +7,7 @@ class HotspotsSpider(scrapy.Spider):
     allowed_domains = ['baidu.com']
     start_urls = ['http://www.baidu.com/']
     headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}
-    page_limit = 3        # 用户自行设定查询最大页数
+    page_limit = 3       # 用户自行设定查询最大页数
     page = 1
     a_page = ''
     def parse(self, response):
@@ -17,14 +17,19 @@ class HotspotsSpider(scrapy.Spider):
                 self.a_page = str(i)
             self.a_page = self.a_page[:-2]
         for counts in range(1+(self.page-1)*10,1+self.page*10):
+            detail_url = ''
             item = CrawlingHotspotsItem()
             address = response.xpath("//*[@id={cou}]/div/h3/a/@href".format(cou=counts)).extract()
             # yield scrapy.Request(url=address,callback=self.parse_detail,meta={'item':item})
             item['address'] = address
             for j in address:
                 detail_url = str(j)
-            # yield item
-            yield scrapy.Request(url=detail_url,callback=self.parse_detail,meta={'item':item})
+            if (detail_url == ''): 
+                yield item
+                self.page = self.page_limit
+                break
+            else:   
+                yield scrapy.Request(url=detail_url,callback=self.parse_detail,meta={'item':item})
         if (self.page < self.page_limit):
             self.page += 1;
             new_page = 'https://www.baidu.com' + self.a_page
