@@ -1,0 +1,8 @@
+scrapy
+selenium
+chromedriver
+pymongo
+pyqt
+wordcloud
+imageio
+jieba

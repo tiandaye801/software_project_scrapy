@@ -4,6 +4,8 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.Qt import QTableWidgetItem,QTabWidget
 import os
+from pymongo import MongoClient
+import scrapy
 #from pipelines import MongoDBPipeline
 
 class MainWindow(QtWidgets.QWidget):
@@ -66,6 +68,8 @@ class MainWindow(QtWidgets.QWidget):
         Url = self.urlin.text()
         with open("links.txt","w") as f:
             f.write(Url)
+        client = MongoClient('127.0.0.1', 27017)
+        client.drop_database('scrapy_db')
         os.system('scrapy crawl baijiahao')
         self.resultWindow = resultWindow()
         self.resultWindow.show()
