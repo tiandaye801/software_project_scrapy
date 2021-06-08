@@ -49,9 +49,9 @@ def load_stopwords_set(stopwords_path):
 
 def get_wordcloud(dict, title, save=False):
     # 词云设置
-    mask_color_path = "../static/images/bg_1.png"  # 设置背景图片路径
-    font_path = '../static/fonts/FZXingKai-S04S.TTF'  # 为matplotlib设置中文字体路径没
-    imgname2 = "../static/images/color_by_img.png"  # 保存的图片名字2(颜色按照背景图片颜色布局生成)
+    mask_color_path = "./crawling/static/images/bg_1.png"  # 设置背景图片路径
+    font_path = './crawling/static/fonts/FZXingKai-S04S.TTF'  # 为matplotlib设置中文字体路径没
+    imgname2 = "./crawling/static/images/color_by_img.png"  # 保存的图片名字2(颜色按照背景图片颜色布局生成)
     width = 1000
     height = 860
     margin = 2
@@ -85,7 +85,7 @@ def get_wordcloud(dict, title, save=False):
 
 
 if __name__ == '__main__':
-    stopwords_path = '../static/stopwords/stopwords.txt'
+    stopwords_path = './crawling/static/stopwords/stopwords.txt'
     stop_set = load_stopwords_set(stopwords_path)
 
     # 数据库连接

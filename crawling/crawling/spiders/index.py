@@ -17,8 +17,8 @@ class MainWindow(QtWidgets.QWidget):
         window_pale = QtGui.QPalette()
         window_pale.setColor(self.backgroundRole(), QColor(240, 248, 255))
         self.setPalette(window_pale)
-        self.setWindowIcon(QIcon('../../images/logo.png'))  # 创建一个QIcon对象并接收一个我们要显示的图片路径作为参数。
-        self.pix = QPixmap('../../images/logo.png')
+        self.setWindowIcon(QIcon('./crawling/images/logo.png'))  # 创建一个QIcon对象并接收一个我们要显示的图片路径作为参数。
+        self.pix = QPixmap('./crawling/images/logo.png')
 
         self.Co_Width = 500
         self.Co_Heigth = 60
@@ -75,7 +75,7 @@ class MainWindow(QtWidgets.QWidget):
         words = self.wordin.text()
         with open("words.txt","w") as f:
             f.write(words)
-        os.chdir('../../../crawling_hotspots/crawling_hotspots/spiders')
+        os.chdir('./crawling_hotspots/crawling_hotspots/spiders')
         os.system('scrapy crawl hotspots')
         self.resultWindow = resultWindow()
         self.resultWindow.show()
@@ -92,7 +92,7 @@ class resultWindow(QtWidgets.QWidget):
         window_pale = QtGui.QPalette()
         window_pale.setColor(self.backgroundRole(), QColor(240, 248, 255))
         self.setPalette(window_pale)
-        self.setWindowIcon(QIcon('../../images/logo.png')) 
+        self.setWindowIcon(QIcon('./crawling/images/logo.png')) 
 
 
         self.analyzebt = QPushButton("生成词云", self)  # 将评论内容生成词云
