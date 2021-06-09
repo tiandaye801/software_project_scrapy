@@ -63,8 +63,6 @@ class MainWindow(QtWidgets.QWidget):
         self.logo.move(int(self.width()/2-100),int(self.height()/6))
 
     def btclicked1(self):
-        self.bufferWindow = bufferWindow()
-        self.bufferWindow.show()
         Url = self.urlin.text()
         with open("links.txt","w") as f:
             f.write(Url)
@@ -72,14 +70,11 @@ class MainWindow(QtWidgets.QWidget):
         os.chdir('./crawling/crawling/spiders')
         os.system('scrapy crawl baijiahao')
         os.chdir('../../../')
-        self.bufferWindow.hide()
         self.resultWindow = resultWindow1()
         self.resultWindow.show()
         self.hide()
 
     def btclicked2(self):
-        self.bufferWindow = bufferWindow()
-        self.bufferWindow.show()
         words = self.wordin.text()
         with open("words.txt","w") as f:
             f.write(words)
@@ -87,7 +82,6 @@ class MainWindow(QtWidgets.QWidget):
         os.chdir('./crawling_hotspots/crawling_hotspots/spiders')
         os.system('scrapy crawl hotspots')
         os.chdir('../../../')
-        self.bufferWindow.hide()
         self.resultWindow = resultWindow2()
         self.resultWindow.show()
         self.hide()
@@ -153,21 +147,27 @@ class resultWindow1(QtWidgets.QWidget):
                 i = 0
                 for x in self.name:
                     temp_data = x['name']  # 临时记录，不能直接插入表格
-                    data = QTableWidgetItem(str(temp_data))  # 转换后可插入表格
+                    temp = str(temp_data).strip('[\'')
+                    temp = temp.strip(']\'')
+                    data = QTableWidgetItem(temp)  # 转换后可插入表格
                     self.tableWidget.setItem(i, j, data)
                     i += 1
             elif j == 1 :
                 i = 0
                 for x in self.time:
                     temp_data = x['time']  # 临时记录，不能直接插入表格
-                    data = QTableWidgetItem(str(temp_data))  # 转换后可插入表格
+                    temp = str(temp_data).strip('[\'')
+                    temp = temp.strip(']\'')
+                    data = QTableWidgetItem(temp)  # 转换后可插入表格
                     self.tableWidget.setItem(i, j, data)
                     i += 1
             elif j == 2 :
                 i = 0
                 for x in self.comment:
                     temp_data = x['comment']  # 临时记录，不能直接插入表格
-                    data = QTableWidgetItem(str(temp_data))  # 转换后可插入表格
+                    temp = str(temp_data).strip('[\'')
+                    temp = temp.strip(']\'')
+                    data = QTableWidgetItem(temp)  # 转换后可插入表格
                     self.tableWidget.setItem(i, j, data)
                     i += 1
 
@@ -175,7 +175,10 @@ class resultWindow1(QtWidgets.QWidget):
 
         self.label.setText("新闻标题：")
         for x in self.topic:
-            self.label_2.setText(str(x['topic']))
+            temp_data = x['topic']
+            temp = str(temp_data).strip('[\'')
+            temp = temp.strip(']\'')
+            self.label_2.setText(temp)
         self.wordButton.setText("将评论生成词云")
         self.returnButton.setText("↩️返回")
 
@@ -241,14 +244,18 @@ class resultWindow2(QtWidgets.QWidget):
                 i = 0
                 for x in self.topic:
                     temp_data = x['topic']  # 临时记录，不能直接插入表格
-                    data = QTableWidgetItem(str(temp_data))  # 转换后可插入表格
+                    temp = str(temp_data).strip('[\'')
+                    temp = temp.strip(']\'')
+                    data = QTableWidgetItem(temp)  # 转换后可插入表格
                     self.tableWidget.setItem(i, j, data)
                     i += 1
             elif j == 1 :
                 i = 0
                 for x in self.address:
                     temp_data = x['address']  # 临时记录，不能直接插入表格
-                    data = QTableWidgetItem(str(temp_data))  # 转换后可插入表格
+                    temp = str(temp_data).strip('[\'')
+                    temp = temp.strip(']\'')
+                    data = QTableWidgetItem(temp)  # 转换后可插入表格
                     self.tableWidget.setItem(i, j, data)
                     i += 1
 
@@ -262,31 +269,9 @@ class resultWindow2(QtWidgets.QWidget):
         self.returnButton.setText("↩️返回")
 
     def btclicked1(self):
-        #os.chdir()
         self.MainWindow = MainWindow()
         self.MainWindow.show()
         self.hide()
-
-class bufferWindow(QtWidgets.QWidget):
-    def __init__(self):
-        super(bufferWindow, self).__init__()
-        self.setupUi()
-
-    def setupUi(self):
-        self.resize(450, 240)
-        self.label = QtWidgets.QLabel(self)
-        self.label.setGeometry(QtCore.QRect(90, 20, 411, 171))
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-
-        self.setWindowTitle('MyScrapy')  # 创建一个窗口标题
-        window_pale = QtGui.QPalette()
-        window_pale.setColor(self.backgroundRole(), QColor(240, 248, 255))
-        self.setPalette(window_pale)
-        self.setWindowIcon(QIcon('./static/images/logo.png')) 
-        self.label.setText("正在采集中，请耐心等待...")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
