@@ -1,2 +1,0 @@
-cd ./crawling_hotspots/crawling_hotspots/spiders
-scrapy crawl hotspots

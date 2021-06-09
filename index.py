@@ -20,8 +20,8 @@ class MainWindow(QtWidgets.QWidget):
         window_pale = QtGui.QPalette()
         window_pale.setColor(self.backgroundRole(), QColor(240, 248, 255))
         self.setPalette(window_pale)
-        self.setWindowIcon(QIcon('./crawling/images/logo.png'))  # 创建一个QIcon对象并接收一个我们要显示的图片路径作为参数。
-        self.pix = QPixmap('./crawling/images/logo.png')
+        self.setWindowIcon(QIcon('./static/images/logo.png'))  # 创建一个QIcon对象并接收一个我们要显示的图片路径作为参数。
+        self.pix = QPixmap('./static/images/logo.png')
 
         self.Co_Width = 500
         self.Co_Heigth = 60
@@ -71,6 +71,7 @@ class MainWindow(QtWidgets.QWidget):
         client.drop_database('scrapy_db')
         os.chdir('./crawling/crawling/spiders')
         os.system('scrapy crawl baijiahao')
+        os.chdir('../../../')
         self.bufferWindow.hide()
         self.resultWindow = resultWindow1()
         self.resultWindow.show()
@@ -85,6 +86,7 @@ class MainWindow(QtWidgets.QWidget):
         client.drop_database('scrapy_db')
         os.chdir('./crawling_hotspots/crawling_hotspots/spiders')
         os.system('scrapy crawl hotspots')
+        os.chdir('../../../')
         self.bufferWindow.hide()
         self.resultWindow = resultWindow2()
         self.resultWindow.show()
@@ -101,7 +103,7 @@ class resultWindow1(QtWidgets.QWidget):
         window_pale = QtGui.QPalette()
         window_pale.setColor(self.backgroundRole(), QColor(240, 248, 255))
         self.setPalette(window_pale)
-        self.setWindowIcon(QIcon('./crawling/images/logo.png')) 
+        self.setWindowIcon(QIcon('./static/images/logo.png')) 
 
         self.label = QtWidgets.QLabel(self)
         self.label.setGeometry(QtCore.QRect(50, 40, 131, 41))
@@ -178,7 +180,6 @@ class resultWindow1(QtWidgets.QWidget):
         self.returnButton.setText("↩️返回")
 
     def btclicked(self):
-        os.chdir('..')
         os.system('python getfrequency.py')
 
     def btclicked1(self):
@@ -197,7 +198,7 @@ class resultWindow2(QtWidgets.QWidget):
         window_pale = QtGui.QPalette()
         window_pale.setColor(self.backgroundRole(), QColor(240, 248, 255))
         self.setPalette(window_pale)
-        self.setWindowIcon(QIcon('./crawling/images/logo.png')) 
+        self.setWindowIcon(QIcon('./static/images/logo.png')) 
 
         self.label = QtWidgets.QLabel(self)
         self.label.setGeometry(QtCore.QRect(50, 40, 131, 41))
@@ -254,13 +255,14 @@ class resultWindow2(QtWidgets.QWidget):
     def resizeEvent(self, evt):  # 重新设置控件座标事件
 
         self.label.setText("关键词：")
-        f = open('../../../words.txt', 'r')
+        f = open('./words.txt', 'r')
         content = f.read()
         f.close()
         self.label_2.setText(content)
         self.returnButton.setText("↩️返回")
 
     def btclicked1(self):
+        #os.chdir()
         self.MainWindow = MainWindow()
         self.MainWindow.show()
         self.hide()
@@ -283,7 +285,7 @@ class bufferWindow(QtWidgets.QWidget):
         window_pale = QtGui.QPalette()
         window_pale.setColor(self.backgroundRole(), QColor(240, 248, 255))
         self.setPalette(window_pale)
-        self.setWindowIcon(QIcon('./crawling/images/logo.png')) 
+        self.setWindowIcon(QIcon('./static/images/logo.png')) 
         self.label.setText("正在采集中，请耐心等待...")
 
 if __name__ == '__main__':

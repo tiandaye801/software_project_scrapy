@@ -113,7 +113,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By 
 from selenium.webdriver import ActionChains
 import time
-f = open('../../../crawling/crawling/spiders/words.txt', 'r')
+f = open('../../../words.txt', 'r')
 content = f.read()
 f.close()
 

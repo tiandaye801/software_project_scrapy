@@ -3,7 +3,7 @@ from scrapy import Request, Spider
 from urllib.parse import quote
 from ..items import ScrapyuniversalItem
 
-f = open('links.txt', 'r')
+f = open('../../../links.txt', 'r')
 start_url = f.read()
 f.close()
 
