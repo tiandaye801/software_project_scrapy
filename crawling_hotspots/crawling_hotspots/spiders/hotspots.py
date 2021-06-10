@@ -1,13 +1,16 @@
 import scrapy
 from ..items import CrawlingHotspotsItem
 import string
+f = open('../../../page.txt', 'r')
+pagein = f.read()
+f.close()
 
 class HotspotsSpider(scrapy.Spider):
     name = 'hotspots'
     allowed_domains = ['baidu.com']
     start_urls = ['http://www.baidu.com/']
     headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'}
-    page_limit = 3       # 用户自行设定查询最大页数
+    page_limit = pagein       # 用户自行设定查询最大页数
     page = 1
     a_page = ''
     def parse(self, response):
