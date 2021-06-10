@@ -14,6 +14,7 @@ class HotspotsSpider(scrapy.Spider):
     page = 1
     a_page = ''
     def parse(self, response):
+        self.page_limit=int(self.page_limit)
         if (self.page == 1): 
             current_page = response.xpath("/html/body/div[1]/div[3]/div[2]/div/a[1]/@href").extract()
             for i in current_page:

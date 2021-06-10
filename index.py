@@ -11,16 +11,21 @@ client = MongoClient('localhost', 27017)
 mydb = client["scrapy_db"]
 mycol = mydb["books"]
 
+
+
 class MainWindow(QtWidgets.QWidget):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setupUi()
 
     def setupUi(self):
+        with open('./static/qss/result1.qss', 'r') as f:
+            qss = f.read()
+        self.setStyleSheet(qss)
         self.resize(1200, 800)
         self.setWindowTitle('MyScrapy')  # 创建一个窗口标题
         window_pale = QtGui.QPalette()
-        window_pale.setColor(self.backgroundRole(), QColor(240, 248, 255))
+        window_pale.setColor(self.backgroundRole(), QColor(255, 255, 255))
         self.setPalette(window_pale)
         self.setWindowIcon(QIcon('./static/images/logo.png'))  # 创建一个QIcon对象并接收一个我们要显示的图片路径作为参数。
         self.pix = QPixmap('./static/images/logo.png')
@@ -35,35 +40,35 @@ class MainWindow(QtWidgets.QWidget):
         self.tabWidget.setObjectName("tabWidget")
         self.tab_1 = QtWidgets.QWidget()
         self.tab_1.setObjectName("tab_1")
-        self.tab_1.setStyleSheet("background-color: rgb(240, 248, 255)")
+        #self.tab_1.setStyleSheet("background-color: white")
         self.urlin = QtWidgets.QLineEdit(self.tab_1)
-        self.urlin.setGeometry(QtCore.QRect(10, 90, 300, 41))
+        self.urlin.setGeometry(QtCore.QRect(10, 90, 550, 41))
         self.urlin.setObjectName("lineEdit")
         self.urlin.setPlaceholderText("请输入想要采集评论的百家号新闻网址。")
         self.numin = QtWidgets.QLineEdit(self.tab_1)
-        self.numin.setGeometry(QtCore.QRect(315, 90, 181, 41))
+        self.numin.setGeometry(QtCore.QRect(565, 90, 181, 41))
         self.numin.setObjectName("lineEdit_1")
         self.numin.setPlaceholderText("采集评论数")
 
         self.pushButton = QtWidgets.QPushButton("开始采集",self.tab_1)
-        self.pushButton.setGeometry(QtCore.QRect(520, 90, 131, 41))
-        self.pushButton.setObjectName("pushButton")
+        self.pushButton.setGeometry(QtCore.QRect(680, 90, 101, 41))
+        self.pushButton.setObjectName("pushButton1")
         self.pushButton.clicked.connect(self.btclicked1)
         self.tabWidget.addTab(self.tab_1, "评论采集")
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
-        self.tab_2.setStyleSheet("background-color: rgb(240, 248, 255)")
+        #self.tab_2.setStyleSheet("background-color: rgb(240, 248, 255)")
         self.wordin = QtWidgets.QLineEdit(self.tab_2)
-        self.wordin.setGeometry(QtCore.QRect(10, 90, 240, 41))
+        self.wordin.setGeometry(QtCore.QRect(10, 90, 550, 41))
         self.wordin.setObjectName("lineEdit_2")
         self.wordin.setPlaceholderText("请输入想要采集的新闻关键词。")
         self.pagein = QtWidgets.QLineEdit(self.tab_2)
-        self.pagein.setGeometry(QtCore.QRect(255, 90, 241, 41))
+        self.pagein.setGeometry(QtCore.QRect(565, 90, 181, 41))
         self.pagein.setObjectName("lineEdit_3")
         self.pagein.setPlaceholderText("采集页数")
         self.pushButton_2 = QtWidgets.QPushButton("开始采集",self.tab_2)
-        self.pushButton_2.setGeometry(QtCore.QRect(520, 90, 131, 41))
-        self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.setGeometry(QtCore.QRect(680, 90, 101, 41))
+        self.pushButton_2.setObjectName("pushButton1")
         self.pushButton_2.clicked.connect(self.btclicked2)
         self.tabWidget.addTab(self.tab_2, "关键词采集")
         self.logo = QLabel(self)
@@ -108,40 +113,44 @@ class resultWindow1(QtWidgets.QWidget):
         super(resultWindow1, self).__init__()
         self.setupUi()
 
+
     def setupUi(self):
+        with open('./static/qss/result1.qss', 'r') as f:
+            qss = f.read()
+        self.setStyleSheet(qss)
         self.resize(1200, 800)
         self.setWindowTitle('MyScrapy')  # 创建一个窗口标题
         window_pale = QtGui.QPalette()
-        window_pale.setColor(self.backgroundRole(), QColor(240, 248, 255))
+        window_pale.setColor(self.backgroundRole(), QColor(255, 255, 255))
         self.setPalette(window_pale)
         self.setWindowIcon(QIcon('./static/images/logo.png')) 
 
         self.label = QtWidgets.QLabel(self)
-        self.label.setGeometry(QtCore.QRect(50, 40, 131, 41))
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.label.setFont(font)
+        self.label.setGeometry(QtCore.QRect(50, 40, 131, 80))
+        # font = QtGui.QFont()
+        # font.setPointSize(14)
+        # self.label.setFont(font)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self)
-        self.label_2.setGeometry(QtCore.QRect(190, 50, 831, 21))
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.label_2.setFont(font)
-        self.label_2.setObjectName("label_2")
+        self.label_2.setGeometry(QtCore.QRect(190, 40, 831, 80))
+        # font = QtGui.QFont()
+        # font.setPointSize(14)
+        # self.label_2.setFont(font)
+        self.label_2.setObjectName("label2")
         self.wordButton = QtWidgets.QPushButton(self)
-        self.wordButton.setGeometry(QtCore.QRect(340, 650, 520, 50))
-        self.wordButton.setObjectName("pushButton")
+        self.wordButton.setGeometry(QtCore.QRect(500, 650, 520, 130))
+        self.wordButton.setObjectName("pushButton3")
         self.wordButton.clicked.connect(self.btclicked)
-        self.wordButton.setStyleSheet("background-color: rgb(240, 248, 255)")
+        self.wordButton.setStyleSheet("background-image:url(./static/images/cloud.png) ")
         self.returnButton = QtWidgets.QPushButton(self)
-        self.returnButton.setGeometry(QtCore.QRect(20, 10, 100, 30))
-        self.returnButton.setObjectName("pushButton")
-        self.returnButton.setStyleSheet("background-color: rgb(240, 248, 255)")
+        self.returnButton.setGeometry(QtCore.QRect(20, 10, 50, 30))
+        self.returnButton.setObjectName("pushButton3")
+        self.returnButton.setStyleSheet("background-image:url(./static/images/arrow-left.png) ;")
         self.returnButton.clicked.connect(self.btclicked1)
         self.imgButton = QtWidgets.QPushButton(self)
-        self.imgButton.setGeometry(QtCore.QRect(50, 650, 150, 50))
-        self.imgButton.setObjectName("pushButton")
-        self.imgButton.setStyleSheet("background-color: rgb(240, 248, 255)")
+        self.imgButton.setGeometry(QtCore.QRect(90, 10, 150, 30))
+        self.imgButton.setObjectName("pushButton3")
+        self.imgButton.setStyleSheet("background-image:url(./static/images/changeimage.png) ;")
         self.imgButton.clicked.connect(self.btclicked2)
 
         self.array = mycol.find()
@@ -163,7 +172,7 @@ class resultWindow1(QtWidgets.QWidget):
         self.time = mycol.find({},{ "_id": 0,"time": 1})
         self.comment = mycol.find({},{ "_id": 0,"comment": 1})
 
-        
+
         for j in range(3):
             if j == 0:
                 i = 0
@@ -193,6 +202,7 @@ class resultWindow1(QtWidgets.QWidget):
                     self.tableWidget.setItem(i, j, data)
                     i += 1
 
+
     def resizeEvent(self, evt):  # 重新设置控件座标事件
 
         self.label.setText("新闻标题：")
@@ -201,9 +211,6 @@ class resultWindow1(QtWidgets.QWidget):
             temp = str(temp_data).strip('[\'')
             temp = temp.strip(']\'')
             self.label_2.setText(temp)
-        self.wordButton.setText("将评论生成词云")
-        self.returnButton.setText("↩️返回")
-        self.imgButton.setText("更改词云背景图片")
 
     def btclicked(self):
         os.system('python getfrequency.py')
@@ -226,30 +233,33 @@ class resultWindow2(QtWidgets.QWidget):
         self.setupUi()
 
     def setupUi(self):
+        with open('./static/qss/result1.qss', 'r') as f:
+            qss = f.read()
+        self.setStyleSheet(qss)
         self.resize(1200, 800)
         self.setWindowTitle('MyScrapy')  # 创建一个窗口标题
         window_pale = QtGui.QPalette()
-        window_pale.setColor(self.backgroundRole(), QColor(240, 248, 255))
+        window_pale.setColor(self.backgroundRole(), QColor(255, 255, 255))
         self.setPalette(window_pale)
         self.setWindowIcon(QIcon('./static/images/logo.png')) 
 
         self.label = QtWidgets.QLabel(self)
-        self.label.setGeometry(QtCore.QRect(50, 40, 131, 41))
+        self.label.setGeometry(QtCore.QRect(50, 40, 131, 80))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self)
-        self.label_2.setGeometry(QtCore.QRect(190, 50, 831, 21))
+        self.label_2.setGeometry(QtCore.QRect(190, 40, 831, 80))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.label_2.setFont(font)
-        self.label_2.setObjectName("label_2")
+        self.label_2.setObjectName("label2")
 
         self.returnButton = QtWidgets.QPushButton(self)
-        self.returnButton.setGeometry(QtCore.QRect(20, 10, 100, 30))
-        self.returnButton.setObjectName("pushButton")
-        self.returnButton.setStyleSheet("background-color: rgb(240, 248, 255)")
+        self.returnButton.setGeometry(QtCore.QRect(20, 10, 50, 30))
+        self.returnButton.setObjectName("pushButton3")
+        self.returnButton.setStyleSheet("background-image:url(./static/images/arrow-left.png)")
         self.returnButton.clicked.connect(self.btclicked1)
 
         self.array = mycol.find()
@@ -269,6 +279,7 @@ class resultWindow2(QtWidgets.QWidget):
         self.topic = mycol.find({},{ "_id": 0,"topic": 1})
         self.address = mycol.find({},{ "_id": 0,"address": 1})
         
+
         for j in range(2):
             if j == 0:
                 i = 0
@@ -289,6 +300,7 @@ class resultWindow2(QtWidgets.QWidget):
                     self.tableWidget.setItem(i, j, data)
                     i += 1
 
+
     def resizeEvent(self, evt):  # 重新设置控件座标事件
 
         self.label.setText("关键词：")
@@ -296,7 +308,6 @@ class resultWindow2(QtWidgets.QWidget):
         content = f.read()
         f.close()
         self.label_2.setText(content)
-        self.returnButton.setText("↩️返回")
 
     def btclicked1(self):
         self.MainWindow = MainWindow()
@@ -305,6 +316,6 @@ class resultWindow2(QtWidgets.QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = resultWindow1()
+    ex = MainWindow()
     ex.show()
     sys.exit(app.exec_())

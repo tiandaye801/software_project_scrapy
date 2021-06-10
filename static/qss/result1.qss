@@ -1,0 +1,153 @@
+#tabWidget{
+        background-color:transparent;
+}
+#tabWidget::pane{
+        background-color:rgb(240, 248, 255);
+        border:2px solid rgb(176, 196, 222);
+}
+QTabBar::tab{
+        background:#e20600;
+        color:white;
+        min-width:35ex;
+        min-height:10ex;
+}
+QTabBar::tab:hover{
+        background:rgb(255, 255, 255, 100);
+        color:black;
+}
+QTabBar::tab:selected{
+        background:rgb(14, 106, 175);
+        color:white;
+}
+QLineEdit {
+    background-color: white;
+    color: #BBBBBB;
+    border: 2px solid;
+    border-color: rgb(200,200,200);
+    padding: 10px;
+    border-radius: 10px;
+    border-style: solid;
+}
+QLineEdit:hover{
+    background-color: rgb(230,230,230);
+    border-color: rgb(100,100,100);
+}
+QLineEdit:focus{
+    background-color: rgb(230,230,230);
+    border-color: rgb(14, 106, 175);
+}
+#pushButton1 {
+    font-size: 16px;
+    color: white;
+
+    text-align: center;
+    padding-left: 5px;
+    padding-top: 0px;
+
+    border:2px solid rgb(14, 106, 175);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    background-color: rgb(14, 106, 175);
+}
+#pushButton1:hover{
+	border-color:rgb(65, 105, 225);
+    background-color: rgb(65, 105, 225);
+}
+#pushButton1:pressed{
+	color: white;
+    background-color: rgb(65, 105, 225);
+}
+#pushButton2 {
+    font-size: 16px;
+    color: white;
+
+    text-align: center;
+    padding-left: 5px;
+    padding-top: 0px;
+
+    border:2px solid rgb(14, 106, 175);
+    border-radius: 10px;
+
+    background-color: rgb(14, 106, 175);
+}
+#pushButton2:hover{
+	border-color:rgb(65, 105, 225);
+    background-color: rgb(65, 105, 225);
+}
+#pushButton2:pressed{
+	color: white;
+    background-color: rgb(65, 105, 225);
+}
+#pushButton3 {
+    background-color: transparent;
+    background-repeat:none ;
+}
+QHeaderView
+{
+    background:transparent;
+}
+
+QHeaderView::section
+{
+    font-size:25px;
+    font-family:"Microsoft YaHei";
+    color:#FFFFFF;
+    background:rgb(14, 106, 175);
+    border:none;
+    text-align:left;
+    min-height:49px;
+    max-height:49px;
+    margin-left:0px;
+    padding-left:0px;
+}
+
+QTableWidget
+{
+    background:#FFFFFF;
+    border:none;
+
+    font-size:20px;
+    font-family:"Microsoft YaHei";
+    color:#666666;
+}
+QTableWidget::item
+{
+    border-bottom:1px solid #EEF1F7 ;
+}
+
+QTableWidget::item:selected
+{
+    color:red;
+    background:#EFF4FF;
+}
+
+
+QScrollBar::handle:vertical
+{
+    background: rgba(255,255,255,20%);
+    border: 0px solid gray;
+    border-radius:3px;
+    width: 8px;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+{
+    background:rgba(255,255,255,10%);
+}
+
+
+QScollBar::add-line:vertical, QScrollBar::sub-line:vertical
+{
+    background:transparent;
+}
+#label{
+    font-size:30px;
+    font-family:"Microsoft YaHei";
+    color:#666666;
+}
+#label2{
+    font-size:30px;
+    font-family:"Microsoft YaHei";
+    color:#666666;
+}
