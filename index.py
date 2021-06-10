@@ -4,6 +4,8 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.Qt import QTableWidgetItem,QTabWidget
 import os
+import cv2
+import numpy as np
 from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 mydb = client["scrapy_db"]
@@ -121,6 +123,11 @@ class resultWindow1(QtWidgets.QWidget):
         self.returnButton.setObjectName("pushButton")
         self.returnButton.setStyleSheet("background-color: rgb(240, 248, 255)")
         self.returnButton.clicked.connect(self.btclicked1)
+        self.imgButton = QtWidgets.QPushButton(self)
+        self.imgButton.setGeometry(QtCore.QRect(50, 650, 150, 50))
+        self.imgButton.setObjectName("pushButton")
+        self.imgButton.setStyleSheet("background-color: rgb(240, 248, 255)")
+        self.imgButton.clicked.connect(self.btclicked2)
 
         self.array = mycol.find()
         self.num = 0
@@ -181,6 +188,7 @@ class resultWindow1(QtWidgets.QWidget):
             self.label_2.setText(temp)
         self.wordButton.setText("将评论生成词云")
         self.returnButton.setText("↩️返回")
+        self.imgButton.setText("更改词云背景图片")
 
     def btclicked(self):
         os.system('python getfrequency.py')
@@ -189,6 +197,13 @@ class resultWindow1(QtWidgets.QWidget):
         self.MainWindow = MainWindow()
         self.MainWindow.show()
         self.hide()
+
+    def btclicked2(self):
+        imgName, imgType = QFileDialog.getOpenFileName(self, "打开图片", "","*.jpg;;*.png;;All Files(*)")
+        img = cv2.imread(imgName)
+        os.remove("static/images/bg_1.png")
+        cv2.imwrite("static/images/bg_1.png",img)
+
 
 class resultWindow2(QtWidgets.QWidget):
     def __init__(self):
@@ -275,6 +290,6 @@ class resultWindow2(QtWidgets.QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = MainWindow()
+    ex = resultWindow1()
     ex.show()
     sys.exit(app.exec_())
