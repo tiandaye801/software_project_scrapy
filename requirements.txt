@@ -2,7 +2,7 @@ scrapy
 selenium
 chromedriver
 pymongo
-pyqt
+pyqt5
 wordcloud
 imageio
 jieba
